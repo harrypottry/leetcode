@@ -1,4 +1,4 @@
-package com.problem;
+package com.studyplan.topInterview150;
 
 /**
  * @author harry

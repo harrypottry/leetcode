@@ -5,42 +5,43 @@ package com.studyplan.topInterview150;
  * @date 2023年11月16日 18:13
  * <a href="https://leetcode.cn/problems/merge-two-sorted-lists/description/?envType=study-plan-v2&envId=top-interview-150">...</a>
  */
-public class interview21 {
+public class interview22 {
 
-    public static class ListNode {
-        int val;
-        ListNode next;
-        ListNode() {}
-        ListNode(int val) {
-            this.val = val;
-        }
-        ListNode(int val, ListNode next) {
-            this.val = val;
-            this.next = next;
-        }
-    }
+    public static ListNode reverseKGroup(ListNode head, int k) {
+//        ListNode dummy = new ListNode(-1, head), prev = dummy;
+        ListNode dummy = new ListNode(-1, head);
+        ListNode prev = dummy;
+        while (true) {
+            // 检查剩余节点是否有k个，不足则返回
+            ListNode last = prev;
+            for (int i = 0; i < k; i++) {
+                last = last.next;
+                if (last == null) {
+                    return dummy.next;
+                }
+            }
 
-
-    public static ListNode mergeTwoLists(ListNode list1, ListNode list2) {
-        if (list1 == null) return  list2;
-        else if (list2 == null) return  list1;
-        else if (list1.val < list2.val) {
-            list1.next = mergeTwoLists(list1.next, list2);
-            return list1;
-        }else {
-            list2.next = mergeTwoLists(list1, list2.next);
-            return list2;
+            // 翻转k个节点
+//            ListNode curr = prev.next, next;
+            ListNode curr = prev.next;
+            ListNode next;
+            for (int i = 0; i < k - 1; i++) {
+                next = curr.next;
+                curr.next = next.next;
+                next.next = prev.next;
+                prev.next = next;
+            }
+            prev = curr;
         }
     }
 
     public static void main(String[] args) {
-        ListNode list1 = new ListNode(1,new ListNode(2,new ListNode(4)));
-        ListNode list2 = new ListNode(1,new ListNode(3,new ListNode(4)));
-        ListNode listNode = mergeTwoLists(list1, list2);
-        while (listNode.next != null) {
+        ListNode list1 = new ListNode(1,new ListNode(2,new ListNode(3)));
+        ListNode listNode = reverseKGroup(list1, 2);
+        while (listNode != null) {
             System.out.println(listNode.val);
+            listNode = listNode.next;
         }
     }
-
 }
 

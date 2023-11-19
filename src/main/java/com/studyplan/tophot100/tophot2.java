@@ -1,4 +1,4 @@
 package com.studyplan.tophot100;
 
-public class tophot1 {
+public class tophot2 {
 }
